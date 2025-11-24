@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ética - Programa de Educación Básica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .back-button {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            padding: 16px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateX(-8px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button:active {
+            transform: translateX(-5px) scale(0.98);
+        }
+
+        .back-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            object-fit: contain;
+        }
+
+        .back-button:hover .back-icon {
+            transform: translateX(-3px);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        
+        .intro h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .ethics-content {
+            padding: 40px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #3498db;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .principle-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-top: 5px solid #3498db;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .principle-card h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .principle-card h3 i {
+            color: #3498db;
+        }
+        
+        .activities {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .scenario {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #2ecc71;
+        }
+        
+        .scenario h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .option {
+            flex: 1;
+            min-width: 200px;
+            background: #e8f4fc;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .option.correct::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .option.correct {
+            padding-left: 40px;
+        }
+        
+        .option:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .quote {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quote-author {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .back-button {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 20px;
+            }
+            
+            .options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-button" onclick="window.location.href='index.html'">
+                <img src="/img/back.png" alt="Volver" class="back-icon">
+                Volver al Inicio
+            </button>
+            <h1>Ética y Valores</h1>
+            <p class="tagline">Aprendiendo a tomar decisiones correctas y vivir en comunidad</p>
+        </header>
+        
+        <section class="intro">
+            <h2>¿Qué es la Ética?</h2>
+            <p>La ética es la rama de la filosofía que estudia lo correcto y lo incorrecto en el comportamiento humano. Nos ayuda a tomar decisiones morales y a entender nuestras responsabilidades hacia los demás.</p>
+            <p>En esta sección aprenderás sobre principios éticos fundamentales y practicarás la toma de decisiones en situaciones de la vida real.</p>
+        </section>
+        
+        <section class="ethics-content">
+            <h2 class="section-title">Principios Éticos Fundamentales</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3>🔍 Respeto</h3>
+                    <p>Valorar la dignidad de todas las personas, sus derechos y diferencias. Tratar a los demás como nos gustaría ser tratados.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>⚖️ Justicia</h3>
+                    <p>Actuar con imparcialidad y equidad, dando a cada persona lo que le corresponde según sus derechos y necesidades.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>🤝 Responsabilidad</h3>
+                    <p>Asumir las consecuencias de nuestras acciones y cumplir con nuestros compromisos y obligaciones.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>💬 Honestidad</h3>
+                    <p>Ser veraz en nuestras palabras y acciones, actuando con transparencia y sinceridad en todas las situaciones.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>❤️ Empatía</h3>
+                    <p>Ponerse en el lugar de los demás, comprendiendo sus sentimientos y perspectivas antes de juzgar o actuar.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>🛡️ Integridad</h3>
+                    <p>Actuar de manera coherente con nuestros valores y principios, incluso cuando nadie nos está observando.</p>
+                </div>
+            </div>
+            
+            <div class="quote">
+                "La ética no es más que el intento racional de averiguar cómo vivir mejor."
+                <div class="quote-author">- Fernando Savater</div>
+            </div>
+            
+            <div class="activities">
+                <h2 class="section-title">Situaciones Éticas para Reflexionar</h2>
+                
+                <div class="scenario">
+                    <h3>Situación 1: El dinero encontrado</h3>
+                    <p>Encuentras una cartera con dinero y documentos de identidad en la calle. ¿Qué harías?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Me quedo con el dinero y tiro la cartera</div>
+                        <div class="option" data-correct="true">Busco al dueño usando la identificación</div>
+                        <div class="option" data-correct="false">La llevo a la policía o lugar indicado</div>
+                        <div class="option" data-correct="false">Pregunto a personas cercanas si perdieron algo</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 2: El examen difícil</h3>
+                    <p>Durante un examen, ves que tu mejor amigo está copiando las respuestas. ¿Cómo actúas?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Le digo al profesor inmediatamente</div>
+                        <div class="option" data-correct="true">Le pido que deje de copiar después del examen</div>
+                        <div class="option" data-correct="false">No hago nada, es su responsabilidad</div>
+                        <div class="option" data-correct="false">Le ofrezco ayuda para estudiar para el próximo</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 3: El trabajo en equipo</h3>
+                    <p>En un trabajo grupal, un compañero no está haciendo su parte, pero tienes miedo de que el grupo se enfade si lo dices. ¿Qué decides?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Hago su parte para evitar conflictos</div>
+                        <div class="option" data-correct="true">Hablo directamente con él sobre el problema</div>
+                        <div class="option" data-correct="false">Comento la situación con todo el grupo</div>
+                        <div class="option" data-correct="false">Le ofrezco ayuda por si tiene dificultades</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 4: El material no autorizado</h3>
+                    <p>Descubres que un compañero tiene fotos del examen que harán mañana y te las ofrece. ¿Qué haces?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Rechazo las fotos y aviso al profesor que el examen fue filtrado</div>
+                        <div class="option" data-correct="false">Las uso para estudiar y asegurarme una buena nota</div>
+                        <div class="option" data-correct="false">Las acepto pero no las uso, no es mi problema</div>
+                        <div class="option" data-correct="false">Le digo que las borre pero no informo a nadie</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 5: Comentarios ofensivos</h3>
+                    <p>En un grupo en línea ves que tu equipo se burla de otro compañero que no está presente. ¿Cómo actúas?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Defiendo al compañero y digo que esos comentarios no son apropiados</div>
+                        <div class="option" data-correct="false">Sólo observo, no quiero involucrarme</div>
+                        <div class="option" data-correct="false">Participo en las bromas para encajar</div>
+                        <div class="option" data-correct="false">Salgo del grupo sin decir nada</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 6: El favor en el trabajo</h3>
+                    <p>Un amigo te pide usar tu clave del trabajo para entrar al sistema porque él no tiene autorización. ¿Qué decides?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Me niego y le explico que no puedo compartir contraseñas</div>
+                        <div class="option" data-correct="false">Se la doy pero sólo por esa ocasión</div>
+                        <div class="option" data-correct="false">Cambio la clave después de prestarla</div>
+                        <div class="option" data-correct="false">Le digo que mejor no me cuente para evitar problemas</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 7: Maltrato animal</h3>
+                    <p>Ves a un desconocido maltratando a un perro en la calle. ¿Qué haces?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Busco ayuda y contacto a autoridades o protección animal</div>
+                        <div class="option" data-correct="false">Lo ignoro, no es mi problema</div>
+                        <div class="option" data-correct="false">Enfrento a la persona directamente y lo insulto</div>
+                        <div class="option" data-correct="false">Grabo un video y lo subo a redes sin intervenir</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 8: El dinero extra en el cambio</h3>
+                    <p>En una tienda te dan más cambio del que corresponde. ¿Cómo reaccionas?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Devuelvo el dinero extra al cajero</div>
+                        <div class="option" data-correct="false">Me lo guardo, fue su error</div>
+                        <div class="option" data-correct="false">Lo uso para comprar más cosas en la tienda</div>
+                        <div class="option" data-correct="false">Lo dono para sentirme menos culpable</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 9: Información confidencial</h3>
+                    <p>Escuchas accidentalmente información privada sobre un compañero y tus amigos te preguntan qué escuchaste. ¿Qué haces?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">No comparto la información y respeto su privacidad</div>
+                        <div class="option" data-correct="false">La cuento solo a mis amigos cercanos</div>
+                        <div class="option" data-correct="false">La exagero para hacer más interesante la historia</div>
+                        <div class="option" data-correct="false">Le digo a la persona involucrada que todos ya lo saben</div>
+                    </div>
+                </div>
+                
+                <div class="scenario">
+                    <h3>Situación 10: El plagio en la presentación</h3>
+                    <p>Un miembro del grupo copia diapositivas de Internet sin citar fuentes. ¿Qué decides?</p>
+                    <div class="options">
+                        <div class="option correct" data-correct="true">Pido que cite correctamente o rehaga esa parte</div>
+                        <div class="option" data-correct="false">Lo dejo así porque mejora la nota</div>
+                        <div class="option" data-correct="false">Le digo que es su responsabilidad si lo descubren</div>
+                        <div class="option" data-correct="false">Informo al profesor sin hablarlo antes con el grupo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>By ESMN &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Definir mensajes de retroalimentación para cada situación
+        const feedbackMessages = {
+            "situacion1": {
+                "correct": "¡Excelente! Buscar al dueño demuestra responsabilidad y respeto por la propiedad ajena.",
+                "incorrect": "Esta opción no es ética porque implica apropiarse de algo que no es tuyo y no considerar los problemas que esto puede causarle al dueño."
+            },
+            "situacion2": {
+                "correct": "¡Correcto! Hablar con tu amigo después del examen muestra respeto por la relación y por la integridad académica.",
+                "incorrect": "Esta opción no es la más adecuada porque no aborda el problema de deshonestidad académica o puede dañar la relación de manera innecesaria."
+            },
+            "situacion3": {
+                "correct": "¡Bien hecho! Hablar directamente con tu compañero muestra respeto y busca resolver el problema de manera constructiva.",
+                "incorrect": "Esta opción no es la mejor porque evita el problema, lo escala innecesariamente o no aborda la situación de manera directa."
+            },
+            "situacion4": {
+                "correct": "¡Excelente decisión! Rechazar el material no autorizado y notificar al profesor demuestra integridad académica y respeto por las normas.",
+                "incorrect": "Esta opción es incorrecta porque compromete tu integridad académica, fomenta la deshonestidad o evita tu responsabilidad ética."
+            },
+            "situacion5": {
+                "correct": "¡Correcto! Defender al compañero ausente muestra respeto, empatía y valentía para enfrentar comportamientos inapropiados.",
+                "incorrect": "Esta opción no es ética porque permite el acoso, participa en él o evita la responsabilidad de intervenir cuando se presencia una injusticia."
+            },
+            "situacion6": {
+                "correct": "¡Bien hecho! Negarte a compartir contraseñas demuestra responsabilidad profesional y respeto por la seguridad de la información.",
+                "incorrect": "Esta opción es incorrecta porque compromete la seguridad, viola políticas de confidencialidad o evade tu responsabilidad profesional."
+            },
+            "situacion7": {
+                "correct": "¡Excelente! Buscar ayuda profesional es la forma más segura y efectiva de proteger al animal sin poner en riesgo tu seguridad.",
+                "incorrect": "Esta opción no es adecuada porque ignora el sufrimiento, confronta de manera peligrosa o no actúa de forma efectiva para ayudar al animal."
+            },
+            "situacion8": {
+                "correct": "¡Correcto! Devolver el dinero extra demuestra honestidad y respeto por el comercio justo.",
+                "incorrect": "Esta opción no es ética porque te aprovechas de un error ajeno, lo cual va en contra de los principios de honestidad y justicia."
+            },
+            "situacion9": {
+                "correct": "¡Bien hecho! Respetar la privacidad demuestra integridad y consideración por los sentimientos y derechos de los demás.",
+                "incorrect": "Esta opción es incorrecta porque viola la confidencialidad, puede dañar reputaciones o causa dolor innecesario al compartir información privada."
+            },
+            "situacion10": {
+                "correct": "¡Excelente decisión! Pedir que se cite correctamente promueve la honestidad académica y el respeto por la propiedad intelectual.",
+                "incorrect": "Esta opción no es ética porque permite el plagio, evade tu responsabilidad o resuelve el problema de manera inapropiada."
+            }
+        };
+
+        // Agregar interactividad a las opciones éticas
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Obtener el número de situación
+                const scenario = this.closest('.scenario');
+                const scenarioTitle = scenario.querySelector('h3').textContent;
+                const situationNumber = scenarioTitle.match(/\d+/)[0];
+                
+                // Remover selección previa en el mismo grupo de opciones
+                const parentOptions = this.parentElement;
+                parentOptions.querySelectorAll('.option').forEach(opt => {
+                    opt.style.background = '#e8f4fc';
+                    opt.style.color = '#333';
+                });
+                
+                // Verificar si es la opción correcta
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                
+                // Aplicar estilo según si es correcta o incorrecta
+                if (isCorrect) {
+                    this.style.background = '#2ecc71';
+                    this.style.color = 'white';
+                    
+                    // Mostrar mensaje de retroalimentación positiva
+                    setTimeout(() => {
+                        alert(feedbackMessages[`situacion${situationNumber}`].correct);
+                    }, 300);
+                } else {
+                    this.style.background = '#e74c3c';
+                    this.style.color = 'white';
+                    
+                    // Mostrar mensaje explicando por qué está mal
+                    setTimeout(() => {
+                        alert(feedbackMessages[`situacion${situationNumber}`].incorrect);
+                    }, 300);
+                }
+            });
+        });
+        
+        // Marcar visualmente las opciones correctas
+        document.querySelectorAll('.option[data-correct="true"]').forEach(option => {
+            option.classList.add('correct');
+        });
+        
+        // Efecto de aparición gradual al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.principle-card, .scenario');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

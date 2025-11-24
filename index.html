@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademyApp UDLAP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image: url('/img/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #e65100, #4caf50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .intro h2 {
+            color: #e65100;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #4caf50;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .intro-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .intro-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .intro-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .intro-card h3 {
+            color: #e65100;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intro-card h3 i {
+            color: #4caf50;
+        }
+        
+        .learning-options {
+            padding: 40px 20px;
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            text-align: center;
+        }
+        
+        .learning-options h2 {
+            color: #e65100;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .learning-button {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 80px 80px;
+            background-position: center 30px;
+            background-repeat: no-repeat;
+            padding-top: 60px;
+        }
+        
+        .learning-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .learning-button span {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .learning-button:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reading {
+            background-color: #b000e6;
+            background-image: url('/img/lectura.png');
+        }
+        
+        .writing {
+            background-color: #ff9800;
+            background-image: url('/img/escritura.png');
+        }
+        
+        .math {
+            background-color: #ec1e14;
+            background-image: url('/img/matem.png');
+        }
+
+        .etica {
+            background-color: #4385ff;
+            background-image: url('/img/etica.png');
+        }
+        
+        .ambiental {
+            background-color: #4caf50;
+            background-image: url('/img/ambiental.png');
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e65100;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .intro-card, .learning-button {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AcademyApp</h1>
+            <h2>Programa de Educación Básica</h2>
+            <p class="tagline">Aprendiendo juntos para un futuro mejor</p>
+        </header>
+        
+        <section class="intro">
+            <h2>Bienvenido a nuestro programa educativo</h2>
+            <p>Nuestro objetivo es proporcionar una base sólida de conocimientos esenciales para el desarrollo personal y profesional.</p>
+            
+            <div class="intro-content">
+                <div class="intro-card">
+                    <h3>📚 Lectura</h3>
+                    <p>Desarrolla habilidades de comprensión lectora y amplía tu vocabulario a través de textos adaptados a tu nivel.</p>
+                </div>
+                
+                <div class="intro-card">
+                    <h3>✍️ Escritura</h3>
+                    <p>Aprende a expresar tus ideas de forma clara y efectiva mediante la práctica de diferentes tipos de escritura.</p>
+                </div>
+                
+                <div class="intro-card">
+                    <h3>🔢 Matemáticas</h3>
+                    <p>Domina las operaciones básicas y desarrolla el pensamiento lógico necesario para resolver problemas cotidianos.</p>
+                </div>
+                
+                <div class="intro-card">
+                    <h3>📜 Etica</h3>
+                    <p>Valores y aportacion para una sociedad estable, compartida y justa.</p>
+                </div>
+
+                <div class="intro-card">
+                    <h3>🌱 Conciencia Ambiental</h3>
+                    <p>Aportar y generar conocimiento para apoyar al medio ambiente y lo que nos rodea.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="learning-options">
+            <h2>Selecciona tu área de aprendizaje</h2>
+            <div class="buttons-container">
+                <a href="/lectura.html" class="learning-button reading">
+                    <span>Lectura</span>
+                </a>
+                
+                <a href="/escritura.html" class="learning-button writing">
+                    <span>Escritura</span>
+                </a>
+                
+                <a href="/mate.html" class="learning-button math">
+                    <span>Matemáticas</span>
+                </a>
+                
+                <a href="/etica.html" class="learning-button etica">
+                    <span>Etica</span>
+                
+                </a>
+             
+                 <a href="/ambiental.html" class="learning-button ambiental">
+                    <span>Conciencia Ambiental</span>
+                    
+                </a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>By ESMN &copy; 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

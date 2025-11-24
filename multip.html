@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende a Multiplicar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .intro h2 {
+            color: #4b6cb7;
+            margin-bottom: 1rem;
+        }
+        
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab h3 {
+            color: #4b6cb7;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #f0f8ff;
+            padding-bottom: 0.5rem;
+        }
+        
+        .multiplication-table {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .table-item {
+            background-color: #e6f2ff;
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .table-item:hover {
+            transform: scale(1.05);
+            background-color: #d1e7ff;
+        }
+        
+        .practice-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .practice-section h2 {
+            color: #4b6cb7;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .exercise p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .exercise-question {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4b6cb7;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .exercise-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .exercise-option {
+            padding: 1rem;
+            background-color: #e6f2ff;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid transparent;
+        }
+        
+        .exercise-option:hover {
+            background-color: #d1e7ff;
+            transform: translateY(-3px);
+        }
+        
+        .selected-correct {
+            background-color: #28a745;
+            color: white;
+            border-color: #1e7e34;
+        }
+        
+        .selected-incorrect {
+            background-color: #dc3545;
+            color: white;
+            border-color: #c82333;
+        }
+        
+        .exercise-result {
+            margin-top: 1rem;
+            font-weight: bold;
+            min-height: 1.5rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .correct {
+            color: #28a745;
+        }
+        
+        .incorrect {
+            color: #dc3545;
+        }
+        
+        button {
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            background-color: #3a559c;
+        }
+        
+        .game-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .game-section h2 {
+            color: #4b6cb7;
+            margin-bottom: 1rem;
+        }
+        
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .game-question {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .game-option {
+            padding: 1rem;
+            background-color: #e6f2ff;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .game-option:hover {
+            background-color: #d1e7ff;
+        }
+        
+        .selected_good {
+            background-color: #06d644;
+            color: white;
+        }
+        .selected_wrong {
+            background-color: #d61919;
+            color: white;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e6f2ff;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #4b6cb7;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background-color: #182848;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs-container {
+                flex-direction: column;
+            }
+            
+            .multiplication-table {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .exercise-options, .game-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .exercise-question {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tablas de Multiplicar</h1>
+        <p>¡Aprende las tablas de multiplicar de manera divertida y práctica!</p>            
+        </p>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <h2>¿Qué es la multiplicación?</h2>
+            <p>La multiplicación es una operación matemática que consiste en sumar un número tantas veces como indica otro número. Por ejemplo, 3 × 4 significa sumar 3 cuatro veces: 3 + 3 + 3 + 3 = 12.</p>
+            <p>En esta página aprenderás las tablas de multiplicar, practicarás con ejercicios y podrás jugar para mejorar tus habilidades.</p>
+        </section>
+        
+        <section class="tabs-container">
+            <div class="tab">
+                <h3>Tabla del 2</h3>
+                <div class="multiplication-table">
+                    <div class="table-item">2 × 1 = 2</div>
+                    <div class="table-item">2 × 2 = 4</div>
+                    <div class="table-item">2 × 3 = 6</div>
+                    <div class="table-item">2 × 4 = 8</div>
+                    <div class="table-item">2 × 5 = 10</div>
+                    <div class="table-item">2 × 6 = 12</div>
+                    <div class="table-item">2 × 7 = 14</div>
+                    <div class="table-item">2 × 8 = 16</div>
+                    <div class="table-item">2 × 9 = 18</div>
+                    <div class="table-item">2 × 10 = 20</div>
+                </div>
+            </div>
+            
+            <div class="tab">
+                <h3>Tabla del 5</h3>
+                <div class="multiplication-table">
+                    <div class="table-item">5 × 1 = 5</div>
+                    <div class="table-item">5 × 2 = 10</div>
+                    <div class="table-item">5 × 3 = 15</div>
+                    <div class="table-item">5 × 4 = 20</div>
+                    <div class="table-item">5 × 5 = 25</div>
+                    <div class="table-item">5 × 6 = 30</div>
+                    <div class="table-item">5 × 7 = 35</div>
+                    <div class="table-item">5 × 8 = 40</div>
+                    <div class="table-item">5 × 9 = 45</div>
+                    <div class="table-item">5 × 10 = 50</div>
+                </div>
+            </div>
+            
+            <div class="tab">
+                <h3>Tabla del 10</h3>
+                <div class="multiplication-table">
+                    <div class="table-item">10 × 1 = 10</div>
+                    <div class="table-item">10 × 2 = 20</div>
+                    <div class="table-item">10 × 3 = 30</div>
+                    <div class="table-item">10 × 4 = 40</div>
+                    <div class="table-item">10 × 5 = 50</div>
+                    <div class="table-item">10 × 6 = 60</div>
+                    <div class="table-item">10 × 7 = 70</div>
+                    <div class="table-item">10 × 8 = 80</div>
+                    <div class="table-item">10 × 9 = 90</div>
+                    <div class="table-item">10 × 10 = 100</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="practice-section">
+            <h2>Practica lo que has aprendido</h2>
+            <div class="exercise-container">
+                <div class="stats">
+                    <div>Correctas: <span id="correct-count">0</span></div>
+                    <div>Incorrectas: <span id="incorrect-count">0</span></div>
+                    <div>Total: <span id="total-count">0</span></div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                
+                <div class="exercise">
+                    <p>Selecciona la respuesta correcta:</p>
+                    <div class="exercise-question" id="exercise-question">3 × 4 = ?</div>
+                    <div class="exercise-options" id="exercise-options">
+                        <!-- Las opciones se generarán con JavaScript -->
+                    </div>
+                    <div class="exercise-result" id="exercise-result"></div>
+                </div>
+                
+                <button id="new-exercise">Nuevo ejercicio</button>
+            </div>
+        </section>
+        
+        <section class="game-section">
+            <h2>Juego de Multiplicación</h2>
+            <div class="game-container">
+                <div class="game-stats">
+                    <div>Puntuación: <span id="score">0</span></div>
+                    <div>Tiempo: <span id="time">60</span>s</div>
+                </div>
+                
+                <div class="game-question" id="game-question">¿Cuánto es 5 × 3?</div>
+                
+                <div class="game-options" id="game-options">
+                    <!-- Las opciones se generarán con JavaScript -->
+                </div>
+                
+                <button id="start-game">Comenzar Juego</button>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>By ESMN &copy; 2025</p>
+    </footer>
+
+    <script>
+        // Elementos del DOM
+        const exerciseQuestion = document.getElementById('exercise-question');
+        const exerciseOptions = document.getElementById('exercise-options');
+        const exerciseResult = document.getElementById('exercise-result');
+        const newExerciseBtn = document.getElementById('new-exercise');
+        const correctCountElement = document.getElementById('correct-count');
+        const incorrectCountElement = document.getElementById('incorrect-count');
+        const totalCountElement = document.getElementById('total-count');
+        const progressBar = document.getElementById('progress-bar');
+        
+        const gameQuestion = document.getElementById('game-question');
+        const gameOptions = document.getElementById('game-options');
+        const startGameBtn = document.getElementById('start-game');
+        const scoreElement = document.getElementById('score');
+        const timeElement = document.getElementById('time');
+        
+        // Variables del ejercicio
+        let exerciseCorrectAnswer;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let totalCount = 0;
+        
+        // Variables del juego
+        let score = 0;
+        let timeLeft = 60;
+        let timer;
+        let currentCorrectAnswer;
+        
+        // Generar un ejercicio aleatorio
+        function generateExercise() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            exerciseQuestion.textContent = `${num1} × ${num2} = ?`;
+            return num1 * num2;
+        }
+        
+        // Generar opciones para el ejercicio
+        function generateExerciseOptions(correctAnswer) {
+            exerciseOptions.innerHTML = "";
+            const options = [correctAnswer];
+            
+            // Generar opciones incorrectas
+            while (options.length < 4) {
+                // Generar opciones incorrectas que sean creíbles
+                let randomOption;
+                const variation = Math.floor(Math.random() * 3);
+                
+                switch(variation) {
+                    case 0:
+                        // Suma en lugar de multiplicación
+                        randomOption = Math.floor(Math.random() * 10) + 1 + Math.floor(Math.random() * 10) + 1;
+                        break;
+                    case 1:
+                        // Resta en lugar de multiplicación
+                        randomOption = Math.abs(Math.floor(Math.random() * 10) + 1 - Math.floor(Math.random() * 10) + 1);
+                        break;
+                    case 2:
+                        // Multiplicación con números cercanos
+                        randomOption = Math.floor(Math.random() * 100) + 1;
+                        break;
+                }
+                
+                // Asegurarse de que la opción no sea la correcta y no se repita
+                if (randomOption !== correctAnswer && !options.includes(randomOption) && randomOption > 0) {
+                    options.push(randomOption);
+                }
+            }
+            
+            // Mezclar las opciones
+            options.sort(() => Math.random() - 0.5);
+            
+            // Crear elementos de opción
+            options.forEach(option => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'exercise-option';
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', function() {
+                    // Deshabilitar todas las opciones después de hacer clic
+                    const allOptions = document.querySelectorAll('.exercise-option');
+                    allOptions.forEach(opt => {
+                        opt.style.pointerEvents = 'none';
+                    });
+                    
+                    totalCount++;
+                    totalCountElement.textContent = totalCount;
+                    
+                    if (parseInt(this.textContent) === correctAnswer) {
+                        this.classList.add('selected-correct');
+                        exerciseResult.textContent = "¡Correcto! Muy bien hecho.";
+                        exerciseResult.className = "exercise-result correct";
+                        correctCount++;
+                        correctCountElement.textContent = correctCount;
+                    } else {
+                        this.classList.add('selected-incorrect');
+                        exerciseResult.textContent = `Incorrecto. La respuesta correcta es ${correctAnswer}.`;
+                        exerciseResult.className = "exercise-result incorrect";
+                        incorrectCount++;
+                        incorrectCountElement.textContent = incorrectCount;
+                        
+                        // Resaltar también la opción correcta
+                        allOptions.forEach(opt => {
+                            if (parseInt(opt.textContent) === correctAnswer) {
+                                opt.classList.add('selected-correct');
+                            }
+                        });
+                    }
+                    
+                    // Actualizar la barra de progreso
+                    updateProgressBar();
+                });
+                exerciseOptions.appendChild(optionElement);
+            });
+        }
+        
+        // Actualizar la barra de progreso
+        function updateProgressBar() {
+            const percentage = totalCount > 0 ? (correctCount / totalCount) * 100 : 0;
+            progressBar.style.width = `${percentage}%`;
+        }
+        
+        // Generar nuevo ejercicio
+        function newExercise() {
+            exerciseResult.textContent = "";
+            exerciseCorrectAnswer = generateExercise();
+            generateExerciseOptions(exerciseCorrectAnswer);
+        }
+        
+        // Inicializar el primer ejercicio
+        newExercise();
+        
+        // Generar nuevo ejercicio al hacer clic en el botón
+        newExerciseBtn.addEventListener('click', newExercise);
+        
+        // Generar pregunta del juego
+        function generateGameQuestion() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            currentCorrectAnswer = num1 * num2;
+            gameQuestion.textContent = `¿Cuánto es ${num1} × ${num2}?`;
+            return currentCorrectAnswer;
+        }
+        
+        // Generar opciones para el juego
+        function generateGameOptions(correctAnswer) {
+            gameOptions.innerHTML = "";
+            const options = [correctAnswer];
+            
+            // Generar opciones incorrectas
+            while (options.length < 4) {
+                const randomOption = Math.floor(Math.random() * 100) + 1;
+                if (!options.includes(randomOption)) {
+                    options.push(randomOption);
+                }
+            }
+            
+            // Mezclar las opciones
+            options.sort(() => Math.random() - 0.5);
+            
+            // Crear elementos de opción
+            options.forEach(option => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'game-option';
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', function() {
+                    if (parseInt(this.textContent) === correctAnswer) {
+                        score++;
+                        scoreElement.textContent = score;
+                        this.classList.add('selected_good');
+                        setTimeout(() => {
+                            this.classList.remove('selected_good');
+                            generateGameQuestion();
+                            generateGameOptions(generateGameQuestion());
+                        }, 500);
+                    } else {
+                        this.classList.add('selected_wrong');
+                        setTimeout(() => {
+                            this.classList.remove('selected_wrong');
+                        }, 500);
+                    }
+                });
+                gameOptions.appendChild(optionElement);
+            });
+        }
+        
+        // Iniciar el juego
+        startGameBtn.addEventListener('click', function() {
+            score = 0;
+            timeLeft = 60;
+            scoreElement.textContent = score;
+            timeElement.textContent = timeLeft;
+            
+            generateGameQuestion();
+            generateGameOptions(currentCorrectAnswer);
+            
+            startGameBtn.disabled = true;
+            
+            timer = setInterval(function() {
+                timeLeft--;
+                timeElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    alert(`¡Tiempo terminado! Tu puntuación final es: ${score}`);
+                    startGameBtn.disabled = false;
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
